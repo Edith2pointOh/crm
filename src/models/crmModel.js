@@ -25,3 +25,13 @@ export const ContactSchema = new Schema({
         default: Date.now
     }
 })
+
+export const parrotSchema = new Schema({
+    message: {
+        type: String
+    },
+    created_date: {
+        type: Date,
+        default: Date.now
+    }
+})

@@ -1,30 +1,34 @@
 import { get } from "mongoose"
-import { addNewContact } from "../controllers/crmController"
+import { addNewContact, getContacts, getContactWithID, updateContact, deleteContact, helloWorld, parrotMessage } from "../controllers/crmController"
 
 const routes = (app) => {
+// get all contacts
     app.route('/contact')
     .get((req, res, next) => {
         // middleware
         console.log(`Request from: ${req.originalUrl}`)
         console.log(`Request type: ${req.method}`)
         next()
-    }, (req, res, next) => {
-        res.send('GET request sucessful')
-
-    })
+    }, getContacts)
     
-
+// post new contact
     .post(addNewContact)
 
     app.route('/contact/:contactId')
-    .put((req, res) =>
-        res.send('PUT request sucessful')
-    )
+// get specific contat
+    .get(getContactWithID)
 
-    .delete((req, res) =>
-        res.send('DELETE request sucessful')
-    )
+// update contact
+    .put(updateContact)
 
+//  delete a contact
+    .delete(deleteContact)
+
+    app.route('/helloWorld')
+    .get(helloWorld)
+
+    app.route('/parrot')
+    .post(parrotMessage)
 }
 
 export default routes;
